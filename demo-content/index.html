@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>AI Content Generator — Demo · Sidea Group</title>
+
+  <!-- Bootstrap 5.3 CSS (locale) -->
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 400; font-display: swap; src: url('../fonts/montserrat-latin.woff2') format('woff2'); }
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-display: swap; src: url('../fonts/montserrat-latin.woff2') format('woff2'); }
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 600; font-display: swap; src: url('../fonts/montserrat-latin.woff2') format('woff2'); }
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 700; font-display: swap; src: url('../fonts/montserrat-latin.woff2') format('woff2'); }
+    @font-face { font-family: 'Fahkwang'; font-style: normal; font-weight: 600; font-display: swap; src: url('../fonts/fahkwang-latin.woff2') format('woff2'); }
+</style>
+  <style>
+    :root { --primary: #197ACF; --secondary: #010326; --lp-dark: #082742; --lp-border-color: #ddd; --lp-font-family: 'Montserrat', sans-serif; --lp-font-family-alt: 'Fahkwang', sans-serif; --lp-logo-width: 180px; }
+    body { font-family: var(--lp-font-family); margin: 0; padding: 0; background: #fff; }
+
+    /* Header minimo */
+    .demo-header { padding: 24px 0; border-bottom: 1px solid #f0f0f0; }
+    .demo-header__logo { width: var(--lp-logo-width); height: auto; }
+
+    /* Video section */
+    .demo-video { padding: 60px 0 40px; }
+    .demo-video__title { font-weight: 700; font-size: 28px; color: var(--lp-dark); margin-bottom: 8px; }
+    .demo-video__subtitle { font-size: 16px; color: #555; margin-bottom: 32px; }
+    .demo-video__wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; background: #082742; }
+    .demo-video__wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .demo-video__placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #9BBDE3; font-size: 18px; font-weight: 500; }
+
+    /* Contesto sotto il video */
+    .demo-context { padding: 32px 0 0; }
+    .demo-context__text { font-size: 15px; line-height: 1.7; color: #555; max-width: 700px; }
+
+    /* Form qualificante */
+    .demo-form { padding: 60px 0 80px; }
+    .demo-form__title { font-weight: 700; font-size: 26px; color: var(--lp-dark); margin-bottom: 8px; }
+    .demo-form__subtitle { font-size: 15px; color: #555; margin-bottom: 28px; max-width: 550px; }
+    .demo-form .form-control { height: 50px; border: 1px solid var(--lp-border-color); border-radius: 4px; padding: 12px 16px; font-size: 14px; }
+    .demo-form textarea.form-control { height: 120px; resize: vertical; }
+    .demo-form .form-label { font-size: 14px; font-weight: 500; color: var(--secondary); margin-bottom: 5px; }
+    .demo-form .required-note { font-size: 12px; color: #888; margin-bottom: 20px; }
+    .demo-form .checkbox-row { margin-bottom: 12px; display: flex; align-items: flex-start; }
+    .demo-form .checkbox-row label { font-size: 12px; line-height: 1.4; color: #5c5c5c; }
+    .demo-form .checkbox-row a { color: var(--primary); }
+    .demo-form .checkbox-row input[type="checkbox"] { width: 18px; height: 18px; min-width: 18px; margin-right: 10px; margin-top: 2px; }
+    .demo-form .btn-submit { background-color: var(--primary); color: white; font-weight: 700; font-size: 16px; border: none; border-radius: 4px; padding: 16px 48px; cursor: pointer; transition: all 0.3s ease; }
+    .demo-form .btn-submit:hover { background-color: #1565b0; transform: translateY(-1px); }
+
+    /* Link secondario */
+    .demo-back { display: inline-block; font-size: 14px; color: var(--primary); text-decoration: none; margin-top: 24px; }
+    .demo-back:hover { text-decoration: underline; }
+
+    /* Footer minimo */
+    .demo-footer { padding: 32px 0; border-top: 1px solid #f0f0f0; }
+    .demo-footer__info { font-family: var(--lp-font-family-alt); font-weight: 600; font-size: 10px; color: var(--lp-dark); }
+    .demo-footer__link { font-size: 10px; color: var(--primary); text-decoration: none; }
+    .demo-footer__link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<!-- ======================== COMPONENT: LAYOUT/HEADER (minimo) ======================== -->
+<header class="demo-header">
+  <div class="container">
+    <a href="#">
+      <img src="https://sideagroup.com/app/uploads/2026/06/Sidea-Group-logo-Esteso_Positivo_RGB.png" alt="Sidea Group" class="demo-header__logo">
+    </a>
+  </div>
+</header>
+<!-- ======================== END COMPONENT: LAYOUT/HEADER ======================== -->
+
+<main class="container">
+
+  <!-- ======================== SECTION: VIDEO ======================== -->
+  <section class="demo-video">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 col-md-10 col-12">
+        <h1 class="demo-video__title">AI Content Generator — Demo</h1>
+        <p class="demo-video__subtitle">Due agenti AI al lavoro: generazione, verifica, validazione. Da argomento a pubblicazione.</p>
+        <div class="demo-video__wrapper">
+          <!-- YouTube unlisted embed: sostituire VIDEO_ID con l'ID reale -->
+          <div class="demo-video__placeholder">
+            <span>Video demo (YouTube unlisted)<br>Sostituire con embed reale</span>
+          </div>
+          <!-- <iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID?rel=0&modestbranding=1&enablejsapi=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ======================== END SECTION: VIDEO ======================== -->
+
+  <!-- ======================== SECTION: CONTESTO ======================== -->
+  <section class="demo-context">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 col-md-10 col-12">
+        <p class="demo-context__text">Quello che hai visto e un sistema multi-agente: il primo scrive seguendo le linee guida editoriali, il secondo verifica fatti, coerenza e stile. L'articolo arriva alla redazione con indicazione di affidabilita e punti da rivedere. La redazione valida e pubblica, non scrive da zero.</p>
+      </div>
+    </div>
+  </section>
+  <!-- ======================== END SECTION: CONTESTO ======================== -->
+
+  <!-- ======================== SECTION: FORM QUALIFICANTE ======================== -->
+  <section class="demo-form">
+    <div class="row justify-content-center">
+      <div class="col-lg-7 col-md-10 col-12">
+        <h2 class="demo-form__title">Ti ha incuriosito? Parliamone.</h2>
+        <p class="demo-form__subtitle">Racconta il tuo problema in poche righe. Ti ricontattiamo noi per capire se e come possiamo aiutarti.</p>
+        <form>
+          <input type="hidden" name="solution" value="content-generator">
+          <input type="hidden" name="origine" value="pagina-demo">
+          <p class="required-note">* Campi obbligatori</p>
+          <div class="row">
+            <div class="col-md-6 mb-3"><label class="form-label">Nome e cognome *</label><input type="text" class="form-control" name="nome" placeholder="Nome e cognome" required></div>
+            <div class="col-md-6 mb-3"><label class="form-label">Email aziendale *</label><input type="email" class="form-control" name="email" placeholder="email@azienda.it" required></div>
+          </div>
+          <div class="row">
+            <div class="col-12 mb-3"><label class="form-label">Telefono</label><input type="tel" class="form-control" name="telefono" placeholder="Telefono (opzionale)"></div>
+          </div>
+          <div class="row">
+            <div class="col-12 mb-3">
+              <label class="form-label">Cosa vorresti approfondire? *</label>
+              <textarea class="form-control" name="argomento" placeholder="Descrivi brevemente il tuo problema o la tua esigenza." required minlength="15" maxlength="400"></textarea>
+            </div>
+          </div>
+          <div class="checkbox-row"><input type="checkbox" id="privacy" required><label for="privacy">Ho letto e accetto la <a href="https://sideagroup.com/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a> *</label></div>
+          <div class="text-center mt-4"><button type="submit" class="btn-submit">Parliamone</button></div>
+        </form>
+        <a href="../hub/" class="demo-back">&larr; Torna alle soluzioni</a>
+      </div>
+    </div>
+  </section>
+  <!-- ======================== END SECTION: FORM QUALIFICANTE ======================== -->
+
+</main>
+
+<!-- ======================== COMPONENT: LAYOUT/FOOTER (minimo) ======================== -->
+<footer class="demo-footer">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 col-12">
+        <p class="demo-footer__info">2024 &copy; Sidea Group S.r.l. · P. IVA 02438540748</p>
+      </div>
+      <div class="col-md-6 col-12 d-flex justify-content-md-end gap-3 mt-2 mt-md-0">
+        <a href="https://sideagroup.com/privacy-policy/" class="demo-footer__link" target="_blank" rel="noopener">Privacy policy</a>
+        <a href="https://sideagroup.com/cookie-policy/" class="demo-footer__link" target="_blank" rel="noopener">Cookie policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- ======================== END COMPONENT: LAYOUT/FOOTER ======================== -->
+
+<script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campagna "AI che lavora" — Preview flusso · Sidea Group</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 400; font-display: swap; src: url('fonts/montserrat-latin.woff2') format('woff2'); }
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 600; font-display: swap; src: url('fonts/montserrat-latin.woff2') format('woff2'); }
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 700; font-display: swap; src: url('fonts/montserrat-latin.woff2') format('woff2'); }
+    :root { --primary: #197ACF; --lp-dark: #082742; }
+    body { font-family: 'Montserrat', sans-serif; margin: 0; padding: 0; background: #f8fafb; }
+    .preview-header { background: var(--lp-dark); padding: 40px 0; text-align: center; }
+    .preview-header h1 { color: #fff; font-size: 28px; font-weight: 700; margin: 0 0 8px; }
+    .preview-header p { color: rgba(255,255,255,0.7); font-size: 15px; margin: 0; }
+    .preview-body { padding: 60px 0; }
+    .flow-title { font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary); margin-bottom: 24px; }
+    .flow-step { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); border: 1px solid #eee; }
+    .flow-step__number { display: inline-block; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #fff; font-weight: 700; font-size: 13px; text-align: center; line-height: 28px; margin-right: 12px; }
+    .flow-step__label { font-weight: 600; font-size: 15px; color: var(--lp-dark); }
+    .flow-step__links { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .flow-step__links a { display: inline-block; background: var(--primary); color: #fff; font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 4px; text-decoration: none; transition: background 0.2s; }
+    .flow-step__links a:hover { background: #1565b0; }
+    .flow-arrow { text-align: center; color: #ccc; font-size: 24px; margin: 4px 0; }
+  </style>
+</head>
+<body>
+  <header class="preview-header">
+    <h1>Campagna "AI che lavora"</h1>
+    <p>Preview del flusso utente · Sidea Group · Autunno 2026</p>
+  </header>
+
+  <main class="preview-body">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-10 col-12">
+
+          <p class="flow-title">Flusso utente</p>
+
+          <div class="flow-step">
+            <span class="flow-step__number">1</span>
+            <span class="flow-step__label">Hub page</span>
+            <div class="flow-step__links">
+              <a href="hub/">Apri l'hub</a>
+            </div>
+          </div>
+
+          <div class="flow-arrow">&darr;</div>
+
+          <div class="flow-step">
+            <span class="flow-step__number">2</span>
+            <span class="flow-step__label">Landing tematica (form leggero)</span>
+            <div class="flow-step__links">
+              <a href="bea/">BEA</a>
+              <a href="pricing/">Pricing</a>
+              <a href="forecasting/">Forecasting</a>
+              <a href="lucea/">Lucea</a>
+              <a href="content/">Content</a>
+            </div>
+          </div>
+
+          <div class="flow-arrow">&darr;</div>
+
+          <div class="flow-step">
+            <span class="flow-step__number">3</span>
+            <span class="flow-step__label">Email con link alla demo</span>
+            <div class="flow-step__links">
+              <a href="email-bea/">BEA</a>
+              <a href="email-pricing/">Pricing</a>
+              <a href="email-forecasting/">Forecasting</a>
+              <a href="email-lucea/">Lucea</a>
+              <a href="email-content/">Content</a>
+            </div>
+          </div>
+
+          <div class="flow-arrow">&darr;</div>
+
+          <div class="flow-step">
+            <span class="flow-step__number">4</span>
+            <span class="flow-step__label">Pagina demo (video + form call)</span>
+            <div class="flow-step__links">
+              <a href="demo-bea/">BEA</a>
+              <a href="demo-pricing/">Pricing</a>
+              <a href="demo-forecasting/">Forecasting</a>
+              <a href="demo-lucea/">Lucea</a>
+              <a href="demo-content/">Content</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI che lavora — Soluzioni AI che funzionano · Sidea Group</title>
+  <meta name="description" content="5 soluzioni AI costruite e funzionanti: shopping assistant, dynamic pricing, forecasting, patient intake, content generation. Scopri quale risolve il tuo problema.">
+
+  <!-- Bootstrap 5.3 CSS (locale) -->
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* ===== Font Faces (offline) ===== */
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 400; font-display: swap; src: url('../fonts/montserrat-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 400; font-display: swap; src: url('../fonts/montserrat-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-display: swap; src: url('../fonts/montserrat-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 500; font-display: swap; src: url('../fonts/montserrat-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 600; font-display: swap; src: url('../fonts/montserrat-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 600; font-display: swap; src: url('../fonts/montserrat-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 700; font-display: swap; src: url('../fonts/montserrat-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Montserrat'; font-style: normal; font-weight: 700; font-display: swap; src: url('../fonts/montserrat-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Fahkwang'; font-style: normal; font-weight: 600; font-display: swap; src: url('../fonts/fahkwang-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Fahkwang'; font-style: normal; font-weight: 600; font-display: swap; src: url('../fonts/fahkwang-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+</style>
+  <style>
+    /* ===== Variables ===== */
+    :root {
+      --primary: #197ACF;
+      --secondary: #010326;
+      --lp-dark: #082742;
+      --lp-border-color: #ddd;
+      --lp-font-family: 'Montserrat', sans-serif;
+      --lp-font-family-alt: 'Fahkwang', sans-serif;
+      --lp-icon-size: 80px;
+      --lp-card-radius: 20px;
+      --lp-card-padding: 36px 24px;
+      --lp-card-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+      --lp-cta-min-width: 320px;
+      --lp-cta-min-height: 58px;
+      --lp-logo-width: 200px;
+      --lp-social-size: 60px;
+    }
+
+    body { font-family: var(--lp-font-family); margin: 0; padding: 0; }
+    .landing-hub { background-color: white; }
+
+    /* Header */
+    .lp-header .navbar { padding-top: 24px; padding-bottom: 24px; }
+    .lp-header .navbar-brand { padding: 0 !important; }
+    .lp-header__logo { width: var(--lp-logo-width); height: auto; }
+    .lp-header .navbar-toggler-icon { filter: invert(1); }
+    .lp-header .navbar-nav { list-style: none !important; padding-left: 0; margin-bottom: 0; }
+    .lp-header .navbar-nav .nav-item { list-style: none !important; margin-left: 4px; }
+    .lp-header .navbar-nav .nav-item::before, .lp-header .navbar-nav .nav-item::after { display: none !important; content: none !important; }
+    .lp-header .nav-link { font-family: var(--lp-font-family); font-weight: 500 !important; font-size: 16px; padding: 8px 16px !important; color: white !important; transition: opacity 0.3s ease; }
+    .lp-header .nav-link:hover { opacity: 0.7; }
+
+    /* Hero */
+    .lp-hero { min-height: 90vh; padding-top: 0; padding-bottom: 0; overflow: visible; background: linear-gradient(135deg, #082742 0%, #0d3a5c 50%, #082742 100%); }
+    .lp-hero .container { padding-top: 200px; padding-bottom: 100px; }
+    @media (min-width: 992px) { .lp-hero .container { padding-top: 22vh; padding-bottom: 10vh; } }
+    .lp-hero__badge { display: inline-block; background: rgba(25,122,207,0.15); border: 1px solid rgba(25,122,207,0.4); color: #9BBDE3; font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; border-radius: 4px; margin-bottom: 24px; }
+    .lp-hero__title { font-family: var(--lp-font-family); font-weight: 700; font-size: 38px; line-height: 1.15; margin-bottom: 20px; color: #fff; }
+    @media (min-width: 768px) { .lp-hero__title { font-size: 44px; } }
+    @media (min-width: 1200px) { .lp-hero__title { font-size: 50px; } }
+    .lp-hero__subtitle { font-family: var(--lp-font-family); font-weight: 400; font-size: 18px; line-height: 1.6; color: rgba(255,255,255,0.85); margin-bottom: 32px; max-width: 600px; }
+    @media (min-width: 768px) { .lp-hero__subtitle { font-size: 20px; } }
+
+    /* CTA Button */
+    .lp-cta { display: inline-flex; align-items: center; justify-content: center; background-color: var(--primary); color: white; font-family: var(--lp-font-family); font-weight: 700; font-size: 17px; padding: 18px 48px; border: none; border-radius: 4px; text-decoration: none; min-width: var(--lp-cta-min-width); min-height: var(--lp-cta-min-height); text-align: center; transition: all 0.3s ease; }
+    @media (max-width: 767px) { .lp-cta { min-width: unset; width: 100%; padding: 16px 24px; font-size: 16px; } }
+    .lp-cta:hover { background-color: #1565b0; color: white; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(25,122,207,0.4); }
+</style>
+  <style>
+    /* Section Title */
+    .lp-section-title--blue { font-family: var(--lp-font-family); font-weight: 600; font-size: 14px; letter-spacing: 2px; color: var(--primary); margin-bottom: 12px; text-transform: uppercase; }
+    .lp-section-title--dark { font-family: var(--lp-font-family); font-weight: 700; font-size: 32px; line-height: 1.25; color: var(--lp-dark); margin-bottom: 16px; }
+    @media (max-width: 767px) { .lp-section-title--dark { font-size: 26px; } }
+    .lp-section-title__subtitle { font-family: var(--lp-font-family); font-weight: 400; font-size: 17px; line-height: 1.6; color: #555; margin-bottom: 0; max-width: 700px; }
+
+    /* Solution Cards */
+    .lp-solution-card { background: #fff; border-radius: var(--lp-card-radius); padding: 32px 28px; height: 100%; box-shadow: var(--lp-card-shadow); border: 1px solid #f0f0f0; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .lp-solution-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+    .lp-solution-card__icon { width: var(--lp-icon-size); height: var(--lp-icon-size); margin-bottom: 20px; color: var(--primary); display: flex; align-items: center; justify-content: center; background: rgba(25,122,207,0.08); border-radius: 16px; }
+    .lp-solution-card__icon svg { width: 40px; height: 40px; }
+    .lp-solution-card__title { font-family: var(--lp-font-family); font-size: 18px; font-weight: 700; color: var(--lp-dark); margin-bottom: 10px; }
+    .lp-solution-card__text { font-family: var(--lp-font-family); font-weight: 400; font-size: 14px; line-height: 1.6; color: #555; margin-bottom: 16px; }
+    .lp-solution-card__link { font-family: var(--lp-font-family); font-weight: 600; font-size: 14px; color: var(--primary); text-decoration: none; }
+    .lp-solution-card__link:hover { text-decoration: underline; }
+
+    /* Method Steps */
+    .lp-method { padding: 100px 0; background: #f8fafb; }
+    .lp-method-step { text-align: center; padding: 24px 16px; }
+    .lp-method-step__number { width: 56px; height: 56px; border-radius: 50%; background: var(--primary); color: #fff; font-weight: 700; font-size: 22px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .lp-method-step__title { font-family: var(--lp-font-family); font-weight: 700; font-size: 18px; color: var(--lp-dark); margin-bottom: 10px; }
+    .lp-method-step__text { font-family: var(--lp-font-family); font-weight: 400; font-size: 15px; line-height: 1.6; color: #555; }
+
+    /* Why Sidea */
+    .lp-why { padding: 100px 0; }
+    .lp-why-col__icon { width: 56px; height: 56px; margin-bottom: 16px; color: var(--primary); }
+    .lp-why-col__title { font-family: var(--lp-font-family); font-weight: 700; font-size: 18px; color: var(--lp-dark); margin-bottom: 8px; }
+    .lp-why-col__text { font-family: var(--lp-font-family); font-weight: 400; font-size: 15px; line-height: 1.6; color: #555; }
+
+    /* Contact Form */
+    .lp-contact { padding: 100px 0; background: #f8fafb; }
+    .lp-contact__title { font-family: var(--lp-font-family); font-weight: 700; font-size: 28px; line-height: 1.3; color: var(--lp-dark); margin-bottom: 8px; }
+    .lp-contact__subtitle { font-family: var(--lp-font-family); font-weight: 400; font-size: 16px; color: #555; margin-bottom: 32px; }
+    .lp-contact .form-control, .lp-contact .form-select { width: 100%; height: 50px; border: 1px solid var(--lp-border-color); border-radius: 4px; padding: 12px 16px; font-family: var(--lp-font-family); font-size: 14px; background-color: white; }
+    .lp-contact textarea.form-control { height: 120px; resize: vertical; }
+    .lp-contact .form-label { font-family: var(--lp-font-family); font-size: 14px; font-weight: 500; color: var(--secondary); margin-bottom: 5px; }
+    .lp-contact .required-note { font-family: var(--lp-font-family); font-size: 12px; color: #888; margin-bottom: 24px; }
+    .lp-contact .checkbox-row { margin-bottom: 12px; display: flex; align-items: flex-start; }
+    .lp-contact .checkbox-row label { font-family: var(--lp-font-family); font-size: 12px; line-height: 1.4; color: #5c5c5c; }
+    .lp-contact .checkbox-row a { color: var(--primary); }
+    .lp-contact .checkbox-row input[type="checkbox"] { width: 18px; height: 18px; min-width: 18px; margin-right: 10px; margin-top: 2px; }
+    .lp-contact .btn-submit { display: inline-block; background-color: var(--primary); color: white; font-family: var(--lp-font-family); font-weight: 700; font-size: 17px; border: none; border-radius: 4px; padding: 16px 48px; cursor: pointer; transition: all 0.3s ease; }
+    .lp-contact .btn-submit:hover { background-color: #1565b0; transform: translateY(-1px); }
+
+    /* Footer */
+    .lp-footer { background-color: white; }
+    .lp-footer__logo { width: var(--lp-logo-width); height: auto; }
+    .lp-footer__social { display: inline-flex; align-items: center; justify-content: center; width: var(--lp-social-size); height: var(--lp-social-size); border: 1px solid var(--lp-dark); border-radius: 50%; color: var(--lp-dark); transition: opacity 0.3s ease; }
+    .lp-footer__social svg { width: 40px; height: 40px; }
+    .lp-footer__social:hover { opacity: 0.7; }
+    .lp-footer__info { font-family: var(--lp-font-family-alt); font-weight: 600; font-size: 10px; line-height: 1.4; color: var(--lp-dark); margin-bottom: 0; }
+    .lp-footer__link { font-family: var(--lp-font-family); font-weight: 400; font-size: 10px; color: var(--primary); text-decoration: none; }
+    .lp-footer__link:hover { text-decoration: underline; }
+
+    /* Utilities */
+    .mt-9 { margin-top: 6rem; }
+    .my-9 { margin-top: 6rem; margin-bottom: 6rem; }
+  </style>
+</head>
+<body>
+
+<!--
+  ╔══════════════════════════════════════════════════════════════════════════════╗
+  ║  LANDING PAGE HUB — "AI CHE LAVORA" — SIDEA GROUP                          ║
+  ║  Campagna Autunno 2026 · /ai-che-lavora/                                   ║
+  ║                                                                              ║
+  ║  COMPONENTI DISPONIBILI:                                                    ║
+  ║  • LAYOUT: layouts/landing-ai-che-lavora.blade.php (header + footer)        ║
+  ║  • HERO: components/landing/hero.blade.php                                  ║
+  ║  • SECTION-TITLE: components/landing/section-title.blade.php                ║
+  ║  • CARD: components/landing/card.blade.php                                  ║
+  ║  • ICON-TEXT: components/landing/icon-text.blade.php                        ║
+  ║  • CTA-BUTTON: components/landing/cta-button.blade.php                     ║
+  ║  • CONTACT-FORM: components/landing/contact-form.blade.php                 ║
+  ║                                                                              ║
+  ║  Mantenere la struttura dei blocchi per la riconversione.                   ║
+  ╚══════════════════════════════════════════════════════════════════════════════╝
+-->
+
+<!-- ======================== COMPONENT: LAYOUT/HEADER ======================== -->
+<header class="lp-header position-absolute w-100 top-0 start-0 z-3">
+  <nav class="navbar navbar-expand-lg bg-transparent py-4">
+    <div class="container">
+      <a class="navbar-brand text-white p-0" href="#">
+        <img src="https://sideagroup.com/app/uploads/2026/06/Sidea-Group-logo-Esteso_Negativo_RGB.png" alt="Sidea Group" class="lp-header__logo">
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarHubContent" aria-controls="navbarHubContent"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarHubContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 list-unstyled d-lg-flex">
+          <li class="nav-item"><a class="nav-link text-white" href="#soluzioni">Le soluzioni</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#metodo">Come lavoriamo</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#perche-sidea">Perché Sidea</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="#contattaci">Contattaci</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<!-- ======================== END COMPONENT: LAYOUT/HEADER ======================== -->
+
+<main class="landing-hub container-fluid overflow-x-hidden p-0">
+
+  <!-- ======================== COMPONENT: HERO ======================== -->
+  <section class="lp-hero d-flex align-items-center">
+    <div class="container position-relative z-2">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-12">
+          <span class="lp-hero__badge">AI CHE FUNZIONA</span>
+          <h1 class="lp-hero__title">L'AI in azienda funziona.<br>Te la facciamo vedere.</h1>
+          <p class="lp-hero__subtitle">5 soluzioni AI costruite su problemi reali. Piattaforme che si aprono, si usano e mostrano numeri. Non slide.</p>
+          <a href="#soluzioni" class="lp-cta">Scopri le soluzioni</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ======================== END COMPONENT: HERO ======================== -->
+
+  <!-- ======================== COMPONENT: SECTION-TITLE ======================== -->
+  <section id="soluzioni" class="py-5 mt-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-12">
+          <p class="lp-section-title--blue">LE SOLUZIONI</p>
+          <h2 class="lp-section-title--dark">5 soluzioni AI costruite e funzionanti</h2>
+          <p class="lp-section-title__subtitle">Ognuna risolve un problema specifico. Scegli quella che ti riguarda e scopri come funziona.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ======================== END COMPONENT: SECTION-TITLE ======================== -->
+
+  <!-- ======================== SECTION: 5 SOLUTION CARDS ======================== -->
+  <section class="pb-5">
+    <div class="container">
+      <div class="row g-4 justify-content-center">
+
+        <!-- CARD 1: BEA — Shopping Assistant -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="lp-solution-card">
+            <div class="lp-solution-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8"/><path d="M8 13h6"/></svg>
+            </div>
+            <h3 class="lp-solution-card__title">Shopping Assistant AI</h3>
+            <p class="lp-solution-card__text">Chi non trova ciò che cerca esce senza chiedere. BEA lo accompagna al checkout.</p>
+            <a href="../bea/" class="lp-solution-card__link">Scopri di più &rarr;</a>
+          </div>
+        </div>
+
+        <!-- CARD 2: Dynamic Pricing -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="lp-solution-card">
+            <div class="lp-solution-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3 class="lp-solution-card__title">Dynamic Pricing AI</h3>
+            <p class="lp-solution-card__text">Il prezzo ottimale per ogni prodotto, ogni giorno. Simula e decidi.</p>
+            <a href="../pricing/" class="lp-solution-card__link">Scopri di più &rarr;</a>
+          </div>
+        </div>
+
+        <!-- CARD 3: Forecasting -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="lp-solution-card">
+            <div class="lp-solution-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h3 class="lp-solution-card__title">Forecasting AI</h3>
+            <p class="lp-solution-card__text">Previsioni spiegabili e simulabili. Il management decide con dati.</p>
+            <a href="../forecasting/" class="lp-solution-card__link">Scopri di più &rarr;</a>
+          </div>
+        </div>
+
+        <!-- CARD 4: Lucea — Patient Intake -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="lp-solution-card">
+            <div class="lp-solution-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <h3 class="lp-solution-card__title">Patient Intake AI</h3>
+            <p class="lp-solution-card__text">L'AI gestisce il volume su WhatsApp. L'umano gestisce la complessità.</p>
+            <a href="../lucea/" class="lp-solution-card__link">Scopri di più &rarr;</a>
+          </div>
+        </div>
+
+        <!-- CARD 5: AI Content Generator -->
+        <div class="col-lg-4 col-md-6 col-12">
+          <div class="lp-solution-card">
+            <div class="lp-solution-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <h3 class="lp-solution-card__title">AI Content Generator</h3>
+            <p class="lp-solution-card__text">Due agenti AI: uno scrive, uno verifica. La redazione pubblica in minuti.</p>
+            <a href="../content/" class="lp-solution-card__link">Scopri di più &rarr;</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- ======================== END SECTION: 5 SOLUTION CARDS ======================== -->
+
+  <!-- ======================== SECTION: METODO ======================== -->
+  <section id="metodo" class="lp-method">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 col-md-10 col-12 text-center">
+          <p class="lp-section-title--blue">IL METODO</p>
+          <h2 class="lp-section-title--dark">Come lavoriamo</h2>
+        </div>
+      </div>
+      <div class="row g-4">
+        <!-- Step 1 -->
+        <div class="col-lg-4 col-md-4 col-12">
+          <div class="lp-method-step">
+            <div class="lp-method-step__number">1</div>
+            <h3 class="lp-method-step__title">Ascoltiamo il problema</h3>
+            <p class="lp-method-step__text">Partiamo dalla tua esigenza concreta. Niente soluzioni preconfezionate.</p>
+          </div>
+        </div>
+        <!-- Step 2 -->
+        <div class="col-lg-4 col-md-4 col-12">
+          <div class="lp-method-step">
+            <div class="lp-method-step__number">2</div>
+            <h3 class="lp-method-step__title">Costruiamo la soluzione</h3>
+            <p class="lp-method-step__text">AI integrata nei tuoi processi, sul tuo stack, con i tuoi dati.</p>
+          </div>
+        </div>
+        <!-- Step 3 -->
+        <div class="col-lg-4 col-md-4 col-12">
+          <div class="lp-method-step">
+            <div class="lp-method-step__number">3</div>
+            <h3 class="lp-method-step__title">Misuriamo i risultati</h3>
+            <p class="lp-method-step__text">KPI definiti dal primo giorno. Se non produce valore, non è finita.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ======================== END SECTION: METODO ======================== -->
+
+  <!-- ======================== SECTION: PERCHE SIDEA ======================== -->
+  <section id="perche-sidea" class="lp-why">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 col-md-10 col-12 text-center">
+          <p class="lp-section-title--blue">PERCHÉ SIDEA</p>
+          <h2 class="lp-section-title--dark">Il partner giusto per portare l'AI in azienda</h2>
+        </div>
+      </div>
+      <div class="row g-4">
+        <!-- Col 1: Partner indipendente -->
+        <div class="col-lg-4 col-md-4 col-12 text-center">
+          <div class="lp-why-col__icon mx-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="56" height="56"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3 class="lp-why-col__title">Partner indipendente</h3>
+          <p class="lp-why-col__text">Non siamo un vendor. Costruiamo su qualsiasi stack, il tuo.</p>
+        </div>
+        <!-- Col 2: AI che funziona -->
+        <div class="col-lg-4 col-md-4 col-12 text-center">
+          <div class="lp-why-col__icon mx-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="56" height="56"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3 class="lp-why-col__title">AI che funziona</h3>
+          <p class="lp-why-col__text">Piattaforme costruite e funzionanti, non proof of concept.</p>
+        </div>
+        <!-- Col 3: Dal 2010 -->
+        <div class="col-lg-4 col-md-4 col-12 text-center">
+          <div class="lp-why-col__icon mx-auto">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="56" height="56"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3 class="lp-why-col__title">Dal 2010</h3>
+          <p class="lp-why-col__text">Oltre 15 anni di consulenza martech. Partner Salesforce, AWS, Adobe, Google.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ======================== END SECTION: PERCHE SIDEA ======================== -->
+
+  <!-- ======================== COMPONENT: CONTACT-FORM ======================== -->
+  <section id="contattaci" class="lp-contact">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-10 col-12">
+          <h2 class="lp-contact__title">Racconta il tuo problema</h2>
+          <p class="lp-contact__subtitle">Non serve sapere tutto adesso. Descrivi la sfida, troviamo insieme la direzione.</p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-10 col-12">
+          <form>
+            <p class="required-note">* Campi obbligatori</p>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Nome *</label>
+                <input type="text" class="form-control" name="nome" placeholder="Nome" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Cognome *</label>
+                <input type="text" class="form-control" name="cognome" placeholder="Cognome" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Email aziendale *</label>
+                <input type="email" class="form-control" name="email" placeholder="email@azienda.it" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Azienda *</label>
+                <input type="text" class="form-control" name="azienda" placeholder="Azienda" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Ruolo</label>
+                <input type="text" class="form-control" name="ruolo" placeholder="Ruolo (opzionale)">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Di cosa hai bisogno?</label>
+                <select class="form-select" name="soluzione">
+                  <option value="" selected disabled>Seleziona...</option>
+                  <option value="shopping-assistant">Shopping assistant per eCommerce</option>
+                  <option value="dynamic-pricing">Ottimizzazione prezzi (Dynamic Pricing)</option>
+                  <option value="forecasting">Previsione vendite (Forecasting)</option>
+                  <option value="patient-intake">Gestione pazienti (Patient Intake)</option>
+                  <option value="content-generator">Generazione contenuti</option>
+                  <option value="non-so">Non so ancora, voglio capire</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 mb-3">
+                <label class="form-label">Descrivi brevemente la tua esigenza *</label>
+                <textarea class="form-control" name="esigenza" placeholder="Qual è la sfida che vorresti affrontare?" required minlength="20" maxlength="500"></textarea>
+              </div>
+            </div>
+            <div class="checkbox-row">
+              <input type="checkbox" id="privacy" required>
+              <label for="privacy">Ho letto e accetto la <a href="https://sideagroup.com/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a> *</label>
+            </div>
+            <div class="text-center mt-4">
+              <button type="submit" class="btn-submit">Invia</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ======================== END COMPONENT: CONTACT-FORM ======================== -->
+
+</main>
+
+<!-- ======================== COMPONENT: LAYOUT/FOOTER ======================== -->
+<footer class="lp-footer py-5 px-4">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-12">
+        <img src="https://sideagroup.com/app/uploads/2026/06/Sidea-Group-logo-Esteso_Positivo_RGB.png" alt="Sidea Group" class="lp-footer__logo">
+      </div>
+    </div>
+    <div class="row mb-4">
+      <div class="col-12 d-flex gap-2">
+        <a href="https://www.linkedin.com/company/sidea-group/" target="_blank" rel="noopener" class="lp-footer__social" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/sideagroup" target="_blank" rel="noopener" class="lp-footer__social" aria-label="Facebook">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/sidea_group/" target="_blank" rel="noopener" class="lp-footer__social" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="row align-items-center">
+      <div class="col-md-6 col-12">
+        <p class="lp-footer__info">
+          Sede legale: Via Adami 2/A, 72015 Fasano (BR)<br>
+          Sede operativa: Via Junipero Serra 19, 70125 Bari<br>
+          Tel. 080 4391385<br>
+          2024 &copy; Sidea Group S.r.l. Tutti i diritti riservati<br>
+          P. IVA 02438540748 · R.E.A. BR-146578
+        </p>
+      </div>
+      <div class="col-md-6 col-12 d-flex justify-content-md-end gap-3 mt-3 mt-md-0">
+        <a href="https://sideagroup.com/privacy-policy/" class="lp-footer__link" target="_blank" rel="noopener">Privacy policy</a>
+        <a href="https://sideagroup.com/cookie-policy/" class="lp-footer__link" target="_blank" rel="noopener">Cookie policy</a>
+        <a href="https://sideagroup.com/contatti/" class="lp-footer__link" target="_blank" rel="noopener">Contatti</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- ======================== END COMPONENT: LAYOUT/FOOTER ======================== -->
+
+<!-- Bootstrap 5.3 JS (locale) -->
+<script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
