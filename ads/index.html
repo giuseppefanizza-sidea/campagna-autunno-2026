@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ads Library — Campagna "AI che lavora" Autunno 2026</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f0f2f5;--card:#fff;--border:#dadde1;--text:#1c1e21;--secondary:#65676b;--blue:#1877f2;--navy:#082742;--accent:#197ACF;--green:#2e7d32;--orange:#e67e00;}
+    *{box-sizing:border-box;}
+    body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);margin:0;color:var(--text);font-size:14px;line-height:1.5;}
+    a{color:var(--blue);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+
+    .page-header{background:#fff;border-bottom:1px solid var(--border);padding:16px 24px;position:sticky;top:0;z-index:100;}
+    .page-header__inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+    .page-header h1{font-size:18px;font-weight:700;margin:0;color:var(--text);}
+    .page-header p{font-size:12px;color:var(--secondary);margin:0;}
+
+    .main{max-width:1100px;margin:0 auto;padding:24px 16px;}
+
+    /* Filter/section headers */
+    .section-bar{display:flex;align-items:center;gap:12px;margin:32px 0 16px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+    .section-bar:first-child{margin-top:0;}
+    .section-bar__badge{font-size:11px;font-weight:600;padding:4px 10px;border-radius:4px;color:#fff;}
+    .section-bar__badge--brand{background:var(--accent);}
+    .section-bar__badge--boost{background:#7b1fa2;}
+    .section-bar__badge--rtg{background:var(--orange);}
+    .section-bar__badge--search{background:var(--green);}
+    .section-bar__title{font-size:16px;font-weight:700;color:var(--text);}
+    .section-bar__meta{font-size:12px;color:var(--secondary);margin-left:auto;}
+
+    /* Ad card - Ads Library style */
+    .ad-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-bottom:24px;}
+    @media(max-width:740px){.ad-grid{grid-template-columns:1fr;}}
+
+    .ad-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:box-shadow .15s;}
+    .ad-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);}
+
+    .ad-card__header{padding:12px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #f0f0f0;}
+    .ad-card__avatar{width:36px;height:36px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .ad-card__avatar span{color:#fff;font-weight:700;font-size:12px;}
+    .ad-card__page-info{flex:1;}
+    .ad-card__page-name{font-size:13px;font-weight:600;}
+    .ad-card__page-meta{font-size:11px;color:var(--secondary);}
+    .ad-card__status{font-size:10px;font-weight:600;color:#fff;background:#42b72a;padding:2px 8px;border-radius:10px;}
+
+    .ad-card__body{padding:12px 16px;}
+    .ad-card__text{font-size:13px;line-height:1.5;color:var(--text);margin-bottom:12px;white-space:pre-line;}
+
+    .ad-card__media{width:100%;border-radius:0;}
+    .ad-card__media img{width:100%;display:block;}
+
+    .ad-card__link-preview{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#f0f2f5;border-top:1px solid var(--border);}
+    .ad-card__link-url{font-size:11px;color:var(--secondary);text-transform:uppercase;letter-spacing:.3px;}
+    .ad-card__link-title{font-size:13px;font-weight:600;color:var(--text);margin-top:2px;}
+    .ad-card__link-cta{font-size:12px;font-weight:600;color:var(--text);background:#e4e6eb;padding:6px 14px;border-radius:4px;white-space:nowrap;}
+
+    .ad-card__footer{padding:10px 16px;border-top:1px solid #f0f0f0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+    .ad-card__tag{font-size:10px;color:var(--secondary);background:#f0f2f5;padding:3px 8px;border-radius:4px;}
+    .ad-card__landing{font-size:11px;font-weight:600;color:var(--accent);margin-left:auto;}
+</style>
+  <style>
+    /* Carousel preview */
+    .carousel-strip{display:flex;gap:8px;overflow-x:auto;padding:0 16px 12px;-webkit-overflow-scrolling:touch;}
+    .carousel-strip::-webkit-scrollbar{height:4px;}
+    .carousel-strip::-webkit-scrollbar-thumb{background:#ccc;border-radius:2px;}
+    .carousel-card{flex:0 0 200px;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#fff;}
+    .carousel-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;}
+    .carousel-card__text{padding:8px 10px;font-size:11px;font-weight:600;color:var(--text);line-height:1.3;}
+    .carousel-card__sub{font-size:10px;color:var(--secondary);font-weight:400;}
+
+    /* Story preview */
+    .story-preview{flex:0 0 160px;border-radius:12px;overflow:hidden;position:relative;aspect-ratio:9/16;background:var(--navy);box-shadow:0 2px 12px rgba(0,0,0,.1);}
+    .story-preview img{width:100%;height:100%;object-fit:cover;opacity:.9;}
+    .story-preview__top{position:absolute;top:10px;left:10px;display:flex;align-items:center;gap:6px;}
+    .story-preview__avatar{width:24px;height:24px;border-radius:50%;background:var(--navy);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;}
+    .story-preview__avatar span{color:#fff;font-size:7px;font-weight:700;}
+    .story-preview__name{color:#fff;font-size:10px;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.6);}
+    .story-preview__cta{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:10px;font-weight:700;padding:6px 16px;border-radius:20px;white-space:nowrap;}
+
+    /* Search ad */
+    .search-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin-bottom:12px;}
+    .search-card__label{font-size:10px;font-weight:600;color:var(--green);display:inline-block;margin-bottom:6px;}
+    .search-card__url{font-size:12px;color:var(--secondary);margin-bottom:2px;}
+    .search-card__title{font-size:16px;font-weight:600;color:#1a0dab;margin-bottom:6px;display:block;}
+    .search-card__title:hover{text-decoration:underline;}
+    .search-card__desc{font-size:13px;color:#4d5156;line-height:1.45;}
+    .search-card__sitelinks{display:grid;grid-template-columns:1fr 1fr;gap:4px 20px;margin-top:10px;padding-top:10px;border-top:1px solid #eee;}
+    .search-card__sl{font-size:12px;color:#1a0dab;padding:3px 0;}
+
+    .target-box{background:#f0f2f5;border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:12px;color:var(--secondary);line-height:1.5;}
+    .target-box strong{color:var(--text);}
+
+    .page-footer{background:#fff;border-top:1px solid var(--border);padding:20px;text-align:center;color:var(--secondary);font-size:12px;margin-top:32px;}
+  </style>
+</head>
+<body>
+<!-- HEADER -->
+<header class="page-header">
+  <div class="page-header__inner">
+    <div>
+      <h1>Ads Library — Campagna "AI che lavora"</h1>
+      <p>Sidea Group · Autunno 2026 · €10.000 · 8 settimane</p>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <a href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/hub/" target="_blank" style="font-size:12px;font-weight:600;background:var(--accent);color:#fff;padding:6px 14px;border-radius:6px;text-decoration:none;">Apri Hub</a>
+    </div>
+  </div>
+</header>
+
+<div class="main">
+
+<!-- ===== LAYER 1: BRAND ===== -->
+<div class="section-bar">
+  <span class="section-bar__badge section-bar__badge--brand">Layer 1</span>
+  <span class="section-bar__title">Brand Awareness</span>
+  <span class="section-bar__meta">LinkedIn + Meta · €4.000 · 40%</span>
+</div>
+<div class="target-box">
+  <strong>Target:</strong> Cold audience · Manager, Director, VP, CXO · Italia · Retail, Healthcare, Tech, Media, Manufacturing · Aziende 51-5000 · 80.000-120.000 profili stimati<br>
+  <strong>Obiettivo:</strong> Far sapere che esistono 5 soluzioni AI costruite e visibili. Non chiedere il lead.<br>
+  <strong>Destinazione:</strong> <a href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/hub/" target="_blank">Hub /ai-che-lavora/</a>
+</div>
+
+<div class="ad-grid">
+  <!-- BR-A -->
+  <div class="ad-card">
+    <div class="ad-card__header">
+      <div class="ad-card__avatar"><span>SG</span></div>
+      <div class="ad-card__page-info">
+        <div class="ad-card__page-name">Sidea Group</div>
+        <div class="ad-card__page-meta">LinkedIn · Sponsored Content</div>
+      </div>
+      <span class="ad-card__status">Bozza</span>
+    </div>
+    <div class="ad-card__body">
+      <div class="ad-card__text">Forecasting. Dynamic pricing. Shopping assistant. Patient intake. Content generation.
+Cinque soluzioni AI. Nessuna è una slide.
+
+Cinque problemi diversi, in cinque settori diversi. Cinque piattaforme che girano: si aprono, si usano, mostrano numeri.
+
+Non le raccontiamo in un pitch. Le facciamo vedere, a chi ha lo stesso problema.
+
+Guarda cosa abbiamo costruito.</div>
+    </div>
+    <div class="ad-card__media"><img src="Creative/01-brand-a-cinque-soluzioni_con_logo.png" alt="5 soluzioni AI. Nessuna è una slide."></div>
+    <div class="ad-card__link-preview">
+      <div><div class="ad-card__link-url">sideagroup.com</div><div class="ad-card__link-title">5 soluzioni AI costruite e funzionanti. Zero slide.</div></div>
+      <a href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/hub/" target="_blank" class="ad-card__link-cta">Learn more</a>
+    </div>
+    <div class="ad-card__footer">
+      <span class="ad-card__tag">BR-A · Angle: Proof</span>
+      <span class="ad-card__tag">Test baseline</span>
+      <a class="ad-card__landing" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/hub/" target="_blank">→ Hub</a>
+    </div>
+  </div>
+
+  <!-- BR-B -->
+  <div class="ad-card">
+    <div class="ad-card__header">
+      <div class="ad-card__avatar"><span>SG</span></div>
+      <div class="ad-card__page-info">
+        <div class="ad-card__page-name">Sidea Group</div>
+        <div class="ad-card__page-meta">Meta · Facebook + Instagram Feed</div>
+      </div>
+      <span class="ad-card__status">Bozza</span>
+    </div>
+    <div class="ad-card__body">
+      <div class="ad-card__text">Il forecast non è più un Excel. Il pricing non è più una decisione trimestrale. Il primo contatto non è più solo umano.
+
+Non perché l'AI è arrivata. Perché è entrata dentro i processi dove si decide.
+
+Abbiamo costruito cinque piattaforme su cinque problemi di business veri: previsione vendite, prezzi, esperienza d'acquisto, intake pazienti, produzione contenuti.
+
+Guarda cosa abbiamo costruito.</div>
+    </div>
+    <div class="ad-card__media"><img src="Creative/02-brand-b-processi_con_logo.png" alt="L'AI non è un progetto IT."></div>
+    <div class="ad-card__link-preview">
+      <div><div class="ad-card__link-url">sideagroup.com</div><div class="ad-card__link-title">L'AI che è già in funzione</div></div>
+      <a href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/hub/" target="_blank" class="ad-card__link-cta">Scopri di più</a>
+    </div>
+    <div class="ad-card__footer">
+      <span class="ad-card__tag">BR-B · Angle: Reframe</span>
+      <span class="ad-card__tag">Test vs A: solo angle</span>
+      <a class="ad-card__landing" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/hub/" target="_blank">→ Hub</a>
+    </div>
+  </div>
+
+  <!-- BR-C -->
+  <div class="ad-card">
+    <div class="ad-card__header">
+      <div class="ad-card__avatar"><span>SG</span></div>
+      <div class="ad-card__page-info">
+        <div class="ad-card__page-name">Sidea Group</div>
+        <div class="ad-card__page-meta">LinkedIn · Sponsored Content</div>
+      </div>
+      <span class="ad-card__status">Bozza</span>
+    </div>
+    <div class="ad-card__body">
+      <div class="ad-card__text">Non siamo un vendor SaaS: non abbiamo una licenza da venderti. Ascoltiamo il problema, costruiamo la soluzione, la mandiamo live.
+
+Se il problema è il margine, diventa una piattaforma di pricing con simulazione.
+Se è la previsione vendite, diventa un forecast che spiega perché.
+Se è il primo contatto, diventa un agente che risponde e sa quando fermarsi.
+
+Cinque problemi, cinque piattaforme, un metodo. Guarda cosa abbiamo costruito.</div>
+    </div>
+    <div class="ad-card__media"><img src="Creative/03-brand-c-anti-vendor_con_logo.png" alt="Non vendiamo software."></div>
+    <div class="ad-card__link-preview">
+      <div><div class="ad-card__link-url">sideagroup.com</div><div class="ad-card__link-title">Non vendiamo software. Costruiamo la soluzione.</div></div>
+      <a href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/hub/" target="_blank" class="ad-card__link-cta">Learn more</a>
+    </div>
+    <div class="ad-card__footer">
+      <span class="ad-card__tag">BR-C · Angle: Anti-vendor</span>
+      <span class="ad-card__tag">Test vs A: solo angle</span>
+      <a class="ad-card__landing" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/hub/" target="_blank">→ Hub</a>
+    </div>
+  </div>
+</div>
+<!-- Carousel brand -->
+<p style="font-size:12px;font-weight:600;color:var(--secondary);margin:16px 0 12px;">Carousel Ad (5 card) · LinkedIn + Meta</p>
+<div class="ad-card" style="max-width:520px;">
+  <div class="ad-card__header">
+    <div class="ad-card__avatar"><span>SG</span></div>
+    <div class="ad-card__page-info">
+      <div class="ad-card__page-name">Sidea Group</div>
+      <div class="ad-card__page-meta">LinkedIn · Carousel Ad</div>
+    </div>
+    <span class="ad-card__status">Bozza</span>
+  </div>
+  <div class="ad-card__body">
+    <div class="ad-card__text">Cinque problemi che non somigliano tra loro. Cinque piattaforme AI che abbiamo costruito e che girano. Scorri: c'è il tuo?</div>
+  </div>
+  <div style="position:relative;">
+    <div class="carousel-strip" style="scroll-snap-type:x mandatory;">
+      <div class="carousel-card" style="scroll-snap-align:start;flex:0 0 260px;">
+        <img src="Creative/04-carousel-01-bea_con_logo.png" alt="Card 1: BEA">
+        <div class="carousel-card__text">Il catalogo è troppo ampio. Il cliente esce.<br><span class="carousel-card__sub">Shopping assistant AI →</span></div>
+      </div>
+      <div class="carousel-card" style="scroll-snap-align:start;flex:0 0 260px;">
+        <img src="Creative/05-carousel-02-pricing_con_logo.png" alt="Card 2: Pricing">
+        <div class="carousel-card__text">Il listino è fermo da mesi. Il mercato no.<br><span class="carousel-card__sub">Dynamic pricing con simulazione →</span></div>
+      </div>
+      <div class="carousel-card" style="scroll-snap-align:start;flex:0 0 260px;">
+        <img src="Creative/06-carousel-03-forecasting_con_logo.png" alt="Card 3: Forecasting">
+        <div class="carousel-card__text">Il forecast dipende da chi lo compila.<br><span class="carousel-card__sub">Forecast che spiega il perché →</span></div>
+      </div>
+      <div class="carousel-card" style="scroll-snap-align:start;flex:0 0 260px;">
+        <img src="Creative/07-carousel-04-lucea_con_logo.png" alt="Card 4: Lucea">
+        <div class="carousel-card__text">WhatsApp non chiude mai. I tuoi operatori sì.<br><span class="carousel-card__sub">Patient intake su WhatsApp →</span></div>
+      </div>
+      <div class="carousel-card" style="scroll-snap-align:start;flex:0 0 260px;">
+        <img src="Creative/08-carousel-05-content_con_logo.png" alt="Card 5: Content">
+        <div class="carousel-card__text">Più temi da coprire. Stesse persone.<br><span class="carousel-card__sub">Due agenti AI per la redazione →</span></div>
+      </div>
+    </div>
+    <div style="position:absolute;top:50%;right:8px;transform:translateY(-80%);width:32px;height:32px;background:#fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.15);display:flex;align-items:center;justify-content:center;pointer-events:none;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+  </div>
+  <div class="ad-card__link-preview">
+    <div><div class="ad-card__link-url">sideagroup.com</div><div class="ad-card__link-title">Scorri per vedere tutte e 5 le soluzioni</div></div>
+    <a href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/hub/" target="_blank" class="ad-card__link-cta">Learn more</a>
+  </div>
+  <div class="ad-card__footer">
+    <span class="ad-card__tag">Carousel 5 card · CTA per card</span>
+    <a class="ad-card__landing" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/hub/" target="_blank">→ Hub</a>
+  </div>
+</div>
+
+<!-- Stories -->
+<p style="font-size:12px;font-weight:600;color:var(--secondary);margin:24px 0 12px;">Stories / Reels (9:16) · Meta Instagram + Facebook</p>
+<div style="display:flex;gap:12px;overflow-x:auto;padding-bottom:12px;">
+  <div class="story-preview">
+    <img src="Creative/story-brand-cinque-soluzioni-9x16_con_logo.png" alt="Story brand">
+    <div class="story-preview__top"><div class="story-preview__avatar"><span>SG</span></div><span class="story-preview__name">Sidea Group</span></div>
+    <div class="story-preview__cta">Scopri di più ↑</div>
+  </div>
+  <div class="story-preview">
+    <img src="Creative/story-rtg-bea-9x16_con_logo.png" alt="Story RTG BEA">
+    <div class="story-preview__top"><div class="story-preview__avatar"><span>SG</span></div><span class="story-preview__name">Sidea Group</span></div>
+    <div class="story-preview__cta">Scopri di più ↑</div>
+  </div>
+  <div class="story-preview">
+    <img src="Creative/story-rtg-pricing-9x16_con_logo.png" alt="Story RTG Pricing">
+    <div class="story-preview__top"><div class="story-preview__avatar"><span>SG</span></div><span class="story-preview__name">Sidea Group</span></div>
+    <div class="story-preview__cta">Scopri di più ↑</div>
+  </div>
+  <div class="story-preview">
+    <img src="Creative/story-rtg-forecasting-9x16_con_logo.png" alt="Story RTG Forecasting">
+    <div class="story-preview__top"><div class="story-preview__avatar"><span>SG</span></div><span class="story-preview__name">Sidea Group</span></div>
+    <div class="story-preview__cta">Scopri di più ↑</div>
+  </div>
+  <div class="story-preview">
+    <img src="Creative/story-rtg-lucea-9x16_con_logo.png" alt="Story RTG Lucea">
+    <div class="story-preview__top"><div class="story-preview__avatar"><span>SG</span></div><span class="story-preview__name">Sidea Group</span></div>
+    <div class="story-preview__cta">Scopri di più ↑</div>
+  </div>
+  <div class="story-preview">
+    <img src="Creative/story-rtg-content-9x16_con_logo.png" alt="Story RTG Content">
+    <div class="story-preview__top"><div class="story-preview__avatar"><span>SG</span></div><span class="story-preview__name">Sidea Group</span></div>
+    <div class="story-preview__cta">Scopri di più ↑</div>
+  </div>
+</div>
+
+<!-- ===== LAYER 2: BOOST ===== -->
+<div class="section-bar">
+  <span class="section-bar__badge section-bar__badge--boost">Layer 2</span>
+  <span class="section-bar__title">Boost Post Organici</span>
+  <span class="section-bar__meta">LinkedIn Campaign Manager · €1.500 · 6×€250</span>
+</div>
+<div class="target-box">
+  <strong>Target:</strong> Warm audience · Stessa audience L1, esclusi follower attuali (reach nuova)<br>
+  <strong>Meccanismo:</strong> Post organico → dopo 24h si misura l'engagement → se sopra la media degli ultimi 10, si boosta con €250 per 3-5 giorni<br>
+  <strong>Regola:</strong> 6 post su 16 (i migliori). Obiettivo engagement per storytelling, visite al sito per carousel con link.<br>
+  <strong>Destinazione:</strong> <a href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/hub/" target="_blank">Hub (link in commento)</a>
+</div>
+
+<div class="ad-grid">
+  <!-- Post 1 - BEA carousel -->
+  <div class="ad-card">
+    <div class="ad-card__header">
+      <div class="ad-card__avatar"><span>SG</span></div>
+      <div class="ad-card__page-info">
+        <div class="ad-card__page-name">Sidea Group</div>
+        <div class="ad-card__page-meta">LinkedIn · Post 1, mar 1 set · Carousel</div>
+      </div>
+      <span class="ad-card__status" style="background:#7b1fa2;">Boost</span>
+    </div>
+    <div class="ad-card__body">
+      <div class="ad-card__text">Il problema del tuo eCommerce non è il catalogo. È la scelta.
+
+Quando l'offerta supera la capacità di orientarsi, il cliente si blocca...</div>
+    </div>
+    <div class="ad-card__media"><img src="Creative/04-carousel-01-bea_con_logo.png" alt="Post 1 BEA carousel"></div>
+    <div class="ad-card__footer">
+      <span class="ad-card__tag">Post 1 · BEA · Carousel</span>
+      <span class="ad-card__tag">Obiettivo: Visite al sito</span>
+    </div>
+  </div>
+
+  <!-- Post 5 - Pricing carousel -->
+  <div class="ad-card">
+    <div class="ad-card__header">
+      <div class="ad-card__avatar"><span>SG</span></div>
+      <div class="ad-card__page-info">
+        <div class="ad-card__page-name">Sidea Group</div>
+        <div class="ad-card__page-meta">LinkedIn · Post 5, gio 3 set · Carousel</div>
+      </div>
+      <span class="ad-card__status" style="background:#7b1fa2;">Boost</span>
+    </div>
+    <div class="ad-card__body">
+      <div class="ad-card__text">Il tuo listino è una decisione presa una volta. Il mercato la rimette in discussione ogni giorno.
+
+I competitor si muovono. L'elasticità della domanda cambia...</div>
+    </div>
+    <div class="ad-card__media"><img src="Creative/05-carousel-02-pricing_con_logo.png" alt="Post 5 Pricing carousel"></div>
+    <div class="ad-card__footer">
+      <span class="ad-card__tag">Post 5 · Pricing · Carousel</span>
+      <span class="ad-card__tag">Obiettivo: Visite al sito</span>
+    </div>
+  </div>
+
+  <!-- Post 9 - Forecasting carousel -->
+  <div class="ad-card">
+    <div class="ad-card__header">
+      <div class="ad-card__avatar"><span>SG</span></div>
+      <div class="ad-card__page-info">
+        <div class="ad-card__page-name">Sidea Group</div>
+        <div class="ad-card__page-meta">LinkedIn · Post 9, mar 8 set · Carousel</div>
+      </div>
+      <span class="ad-card__status" style="background:#7b1fa2;">Boost</span>
+    </div>
+    <div class="ad-card__body">
+      <div class="ad-card__text">Il forecast trimestrale, nella maggior parte delle aziende, dipende da chi lo fa.
+
+Qualcuno incrocia dieci Excel e produce un numero: non è ripetibile, non è spiegabile...</div>
+    </div>
+    <div class="ad-card__media"><img src="Creative/06-carousel-03-forecasting_con_logo.png" alt="Post 9 Forecasting carousel"></div>
+    <div class="ad-card__footer">
+      <span class="ad-card__tag">Post 9 · Forecasting · Carousel</span>
+      <span class="ad-card__tag">Obiettivo: Visite al sito</span>
+    </div>
+  </div>
+
+  <!-- Post 10 - Forecasting storytelling (OBBLIGATORIO) -->
+  <div class="ad-card" style="border:2px solid #7b1fa2;">
+    <div class="ad-card__header">
+      <div class="ad-card__avatar"><span>SG</span></div>
+      <div class="ad-card__page-info">
+        <div class="ad-card__page-name">Sidea Group</div>
+        <div class="ad-card__page-meta">LinkedIn · Post 10, gio 10 set · Storytelling</div>
+      </div>
+      <span class="ad-card__status" style="background:#7b1fa2;">Obbligatorio</span>
+    </div>
+    <div class="ad-card__body">
+      <div class="ad-card__text">La resistenza più comune all'AI in azienda non è tecnica. È umana.
+
+«Il report che producevo io analizzando 10 Excel adesso è inutile. E quindi io sono inutile.»
+
+L'ha detta un manager, non un detrattore dell'AI. È la resistenza più frequente che incontriamo quando attiviamo un sistema di forecasting: non è una questione di competenza, è una questione di ruolo...</div>
+    </div>
+    <div class="ad-card__media"><img src="Creative/20b-post10-frase-manager.png" alt="Post 10 - Citazione Marco Ferretti"></div>
+    <div class="ad-card__footer">
+      <span class="ad-card__tag">Post 10 · Forecasting · Storytelling</span>
+      <span class="ad-card__tag">Obiettivo: Engagement</span>
+      <span class="ad-card__tag" style="background:#f3e5f5;color:#7b1fa2;">Priorità massima</span>
+    </div>
+  </div>
+
+  <!-- Post 13 - Lucea carousel -->
+  <div class="ad-card">
+    <div class="ad-card__header">
+      <div class="ad-card__avatar"><span>SG</span></div>
+      <div class="ad-card__page-info">
+        <div class="ad-card__page-name">Sidea Group</div>
+        <div class="ad-card__page-meta">LinkedIn · Post 13, gio 10 set · Carousel</div>
+      </div>
+      <span class="ad-card__status" style="background:#7b1fa2;">Boost</span>
+    </div>
+    <div class="ad-card__body">
+      <div class="ad-card__text">In molte cliniche il primo contatto con il paziente non avviene al telefono. Avviene su WhatsApp.
+
+Informazioni, disponibilità, preventivi: tutto su un canale che non ha orari...</div>
+    </div>
+    <div class="ad-card__media"><img src="Creative/07-carousel-04-lucea_con_logo.png" alt="Post 13 Lucea carousel"></div>
+    <div class="ad-card__footer">
+      <span class="ad-card__tag">Post 13 · Lucea · Carousel</span>
+      <span class="ad-card__tag">Obiettivo: Visite al sito</span>
+    </div>
+  </div>
+
+  <!-- Post 15 - AI Content carousel -->
+  <div class="ad-card">
+    <div class="ad-card__header">
+      <div class="ad-card__avatar"><span>SG</span></div>
+      <div class="ad-card__page-info">
+        <div class="ad-card__page-name">Sidea Group</div>
+        <div class="ad-card__page-meta">LinkedIn · Post 15, gio 8 ott · Carousel</div>
+      </div>
+      <span class="ad-card__status" style="background:#7b1fa2;">Boost</span>
+    </div>
+    <div class="ad-card__body">
+      <div class="ad-card__text">Una redazione da 5 persone non scala. Una da 50 non è sostenibile.
+
+Il flusso che abbiamo costruito mette due agenti AI in sequenza: il primo scrive, il secondo verifica...</div>
+    </div>
+    <div class="ad-card__media"><img src="Creative/08-carousel-05-content_con_logo.png" alt="Post 15 Content carousel"></div>
+    <div class="ad-card__footer">
+      <span class="ad-card__tag">Post 15 · AI Content · Carousel</span>
+      <span class="ad-card__tag">Obiettivo: Visite al sito</span>
+    </div>
+  </div>
+</div>
+<!-- ===== LAYER 3: REMARKETING ===== -->
+<div class="section-bar">
+  <span class="section-bar__badge section-bar__badge--rtg">Layer 3</span>
+  <span class="section-bar__title">Remarketing per tema</span>
+  <span class="section-bar__meta">LinkedIn + Meta · €2.500 · 25%</span>
+</div>
+<div class="target-box">
+  <strong>Target:</strong> Hot audience · Visitatori landing tematiche (7-180gg) + engager post tematici (7-90gg)<br>
+  <strong>Esclusioni:</strong> Lead già convertiti<br>
+  <strong>Frequenza:</strong> max 5/settimana/utente · 2 creatività in rotazione per tema<br>
+  <strong>CTA:</strong> "Racconta il tuo problema, troviamo insieme una soluzione"<br>
+  <strong>Destinazione:</strong> Landing tematica corrispondente
+</div>
+
+<div class="ad-grid">
+  <!-- RTG BEA -->
+  <div class="ad-card">
+    <div class="ad-card__header">
+      <div class="ad-card__avatar"><span>SG</span></div>
+      <div class="ad-card__page-info">
+        <div class="ad-card__page-name">Sidea Group</div>
+        <div class="ad-card__page-meta">LinkedIn · Remarketing BEA</div>
+      </div>
+      <span class="ad-card__status" style="background:var(--orange);">RTG</span>
+    </div>
+    <div class="ad-card__body">
+      <div class="ad-card__text">Il tuo eCommerce ha migliaia di referenze. Il cliente ne guarda tre. Se non sono quelle giuste, esce e non torna.
+
+Nel negozio fisico quel momento lo salva il consulente: chiede cosa cerchi, capisce il gusto, propone due o tre cose sensate.
+
+Online quel ruolo non lo copriva nessuno. Abbiamo costruito chi lo fa: ascolta l'esigenza, propone tre opzioni, spiega la composizione del prodotto, aggiunge al carrello, poi suggerisce l'abbinamento coerente.
+
+Non è un chatbot. È un consulente che costruisce il carrello.
+
+Racconta il tuo problema, troviamo insieme una soluzione.</div>
+    </div>
+    <div class="ad-card__media"><img src="Creative/09-rtg-bea_con_logo.png" alt="RTG BEA"></div>
+    <div class="ad-card__link-preview">
+      <div><div class="ad-card__link-url">sideagroup.com</div><div class="ad-card__link-title">Il tuo catalogo è ampio. Il cliente ne vede tre prodotti.</div></div>
+      <a href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/bea/" target="_blank" class="ad-card__link-cta">Learn more</a>
+    </div>
+    <div class="ad-card__footer">
+      <span class="ad-card__tag">RTG-BEA · Settimana 3+</span>
+      <a class="ad-card__landing" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/bea/" target="_blank">→ Landing BEA</a>
+    </div>
+  </div>
+
+  <!-- RTG Pricing -->
+  <div class="ad-card">
+    <div class="ad-card__header">
+      <div class="ad-card__avatar"><span>SG</span></div>
+      <div class="ad-card__page-info">
+        <div class="ad-card__page-name">Sidea Group</div>
+        <div class="ad-card__page-meta">Meta · Remarketing Pricing</div>
+      </div>
+      <span class="ad-card__status" style="background:var(--orange);">RTG</span>
+    </div>
+    <div class="ad-card__body">
+      <div class="ad-card__text">Il prezzo giusto non è il più alto: è quello che tiene il margine senza perdere domanda. Lo calcoliamo per ogni SKU.
+
+Vedi il prezzo ottimale, la posizione dei competitor e la soglia oltre la quale non conviene più. Simuli, controlli il margine atteso, applichi tu.
+
+Racconta il tuo problema, troviamo insieme una soluzione.</div>
+    </div>
+    <div class="ad-card__media"><img src="Creative/10-rtg-pricing_con_logo.png" alt="RTG Pricing"></div>
+    <div class="ad-card__link-preview">
+      <div><div class="ad-card__link-url">sideagroup.com</div><div class="ad-card__link-title">Dynamic pricing con controllo umano</div></div>
+      <a href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/pricing/" target="_blank" class="ad-card__link-cta">Scopri di più</a>
+    </div>
+    <div class="ad-card__footer">
+      <span class="ad-card__tag">RTG-Pricing · Settimana 5+</span>
+      <a class="ad-card__landing" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/pricing/" target="_blank">→ Landing Pricing</a>
+    </div>
+  </div>
+
+  <!-- RTG Forecasting -->
+  <div class="ad-card">
+    <div class="ad-card__header">
+      <div class="ad-card__avatar"><span>SG</span></div>
+      <div class="ad-card__page-info">
+        <div class="ad-card__page-name">Sidea Group</div>
+        <div class="ad-card__page-meta">LinkedIn · Remarketing Forecasting</div>
+      </div>
+      <span class="ad-card__status" style="background:var(--orange);">RTG</span>
+    </div>
+    <div class="ad-card__body">
+      <div class="ad-card__text">«Il report che facevo io con 10 Excel adesso è inutile. E quindi io sono inutile.» L'ha detto un manager.
+
+Gli abbiamo dato un forecast che spiega il peso di ogni variabile e che gli lascia costruire gli scenari: chiude un canale, sposta le scontistiche, confronta, decide.
+
+Il modello calcola. La decisione resta dove deve stare.
+
+Racconta il tuo problema, troviamo insieme una soluzione.</div>
+    </div>
+    <div class="ad-card__media"><img src="Creative/11-rtg-forecasting_con_logo.png" alt="RTG Forecasting"></div>
+    <div class="ad-card__link-preview">
+      <div><div class="ad-card__link-url">sideagroup.com</div><div class="ad-card__link-title">Un forecast senza spiegazione è solo un'opinione</div></div>
+      <a href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/forecasting/" target="_blank" class="ad-card__link-cta">Learn more</a>
+    </div>
+    <div class="ad-card__footer">
+      <span class="ad-card__tag">RTG-Forecasting · Settimana 7+</span>
+      <a class="ad-card__landing" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/forecasting/" target="_blank">→ Landing Forecasting</a>
+    </div>
+  </div>
+
+  <!-- RTG Lucea -->
+  <div class="ad-card">
+    <div class="ad-card__header">
+      <div class="ad-card__avatar"><span>SG</span></div>
+      <div class="ad-card__page-info">
+        <div class="ad-card__page-name">Sidea Group</div>
+        <div class="ad-card__page-meta">Meta · Remarketing Lucea</div>
+      </div>
+      <span class="ad-card__status" style="background:var(--orange);">RTG</span>
+    </div>
+    <div class="ad-card__body">
+      <div class="ad-card__text">I pazienti scrivono su WhatsApp a tutte le ore. L'AI risponde, informa e genera il preventivo dal listino.
+
+All'operatore arriva solo ciò che richiede una persona, con il riepilogo già scritto di cosa serviva e perché l'AI si è fermata.
+
+Racconta il tuo problema, troviamo insieme una soluzione.</div>
+    </div>
+    <div class="ad-card__media"><img src="Creative/12-rtg-lucea_con_logo.png" alt="RTG Lucea"></div>
+    <div class="ad-card__link-preview">
+      <div><div class="ad-card__link-url">sideagroup.com</div><div class="ad-card__link-title">Patient intake su WhatsApp</div></div>
+      <a href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/lucea/" target="_blank" class="ad-card__link-cta">Scopri di più</a>
+    </div>
+    <div class="ad-card__footer">
+      <span class="ad-card__tag">RTG-Lucea · Settimana 8</span>
+      <a class="ad-card__landing" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/lucea/" target="_blank">→ Landing Lucea</a>
+    </div>
+  </div>
+
+  <!-- RTG Content -->
+  <div class="ad-card">
+    <div class="ad-card__header">
+      <div class="ad-card__avatar"><span>SG</span></div>
+      <div class="ad-card__page-info">
+        <div class="ad-card__page-name">Sidea Group</div>
+        <div class="ad-card__page-meta">LinkedIn · Remarketing Content</div>
+      </div>
+      <span class="ad-card__status" style="background:var(--orange);">RTG</span>
+    </div>
+    <div class="ad-card__body">
+      <div class="ad-card__text">Un agente AI scrive seguendo le linee guida. Un secondo verifica fatti, coerenza e stile. La redazione valida e pubblica.
+
+Ogni bozza arriva con un livello di affidabilità dichiarato e i punti da controllare. In pochi minuti, non in ore. La firma resta umana.
+
+Racconta il tuo problema, troviamo insieme una soluzione.</div>
+    </div>
+    <div class="ad-card__media"><img src="Creative/13-rtg-content_con_logo.png" alt="RTG Content"></div>
+    <div class="ad-card__link-preview">
+      <div><div class="ad-card__link-url">sideagroup.com</div><div class="ad-card__link-title">La redazione non scala. Il flusso di lavoro sì.</div></div>
+      <a href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/content/" target="_blank" class="ad-card__link-cta">Learn more</a>
+    </div>
+    <div class="ad-card__footer">
+      <span class="ad-card__tag">RTG-Content · Settimana 8</span>
+      <a class="ad-card__landing" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/content/" target="_blank">→ Landing Content</a>
+    </div>
+  </div>
+</div>
+<!-- ===== LAYER 4: GOOGLE SEARCH ===== -->
+<div class="section-bar">
+  <span class="section-bar__badge section-bar__badge--search">Layer 4</span>
+  <span class="section-bar__title">Google Search (RSA)</span>
+  <span class="section-bar__meta">Google Ads · €2.000 · 20%</span>
+</div>
+<div class="target-box">
+  <strong>Target:</strong> Intent diretto · Chi cerca attivamente soluzioni AI (consulenza, ecommerce, forecasting, pricing, healthcare, content)<br>
+  <strong>Logica:</strong> La Search intercetta in parallelo a tutti gli step del funnel social. Sia chi non ha mai visto il brand, sia chi cerca dopo esposizione.<br>
+  <strong>Destinazione:</strong> Hub (generico) o landing tematica (per cluster)
+</div>
+
+<div class="ad-grid">
+  <!-- Generico -->
+  <div class="search-card">
+    <span class="search-card__label">Sponsorizzato · Cluster A: AI Solutions</span>
+    <div class="search-card__url">sideagroup.com/ai-che-lavora/soluzioni</div>
+    <a class="search-card__title" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/hub/" target="_blank">Soluzioni AI che funzionano — Partner AI per aziende — Demo reale, zero slide</a>
+    <div class="search-card__desc">Non vendiamo software. Costruiamo soluzioni AI sui tuoi processi. 5 soluzioni AI costruite: vendite, prezzi, eCommerce, sanita, contenuti. Demo riservata su richiesta.</div>
+    <div class="search-card__sitelinks">
+      <a class="search-card__sl" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/bea/" target="_blank">Shopping Assistant AI</a>
+      <a class="search-card__sl" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/pricing/" target="_blank">Dynamic Pricing</a>
+      <a class="search-card__sl" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/forecasting/" target="_blank">Forecasting AI</a>
+      <a class="search-card__sl" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/lucea/" target="_blank">Patient Intake</a>
+    </div>
+  </div>
+
+  <!-- BEA -->
+  <div class="search-card">
+    <span class="search-card__label">Sponsorizzato · Cluster B: AI eCommerce</span>
+    <div class="search-card__url">sideagroup.com/ai-che-lavora/assistant</div>
+    <a class="search-card__title" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/bea/" target="_blank">Shopping Assistant AI — Guida il cliente al checkout — Più di un chatbot</a>
+    <div class="search-card__desc">Ascolta l'esigenza, consiglia i prodotti, li aggiunge al carrello. Non un chatbot: ricorda gusti, budget e maison preferite del cliente. Cross-sell coerente fino al checkout.</div>
+  </div>
+
+  <!-- Pricing -->
+  <div class="search-card">
+    <span class="search-card__label">Sponsorizzato · Cluster C: Dynamic Pricing</span>
+    <div class="search-card__url">sideagroup.com/ai-che-lavora/pricing</div>
+    <a class="search-card__title" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/pricing/" target="_blank">Dynamic Pricing AI — Simula prima di applicare — Ottimizza il margine</a>
+    <div class="search-card__desc">Prezzo ottimale per prodotto, margine atteso e posizione vs competitor. Simuli il prezzo, vedi il margine, poi applichi. Nessuna automazione cieca. Tolleranza al churn e soglia di break-even.</div>
+  </div>
+
+  <!-- Forecasting -->
+  <div class="search-card">
+    <span class="search-card__label">Sponsorizzato · Cluster D: AI Forecasting</span>
+    <div class="search-card__url">sideagroup.com/ai-che-lavora/forecasting</div>
+    <a class="search-card__title" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/forecasting/" target="_blank">Previsione vendite con AI — Forecast che si spiega — What-if analysis integrata</a>
+    <div class="search-card__desc">Il modello prevede e spiega: per ogni previsione vedi il peso delle variabili. Simuli scenari what-if prima di decidere. Analisi archiviate e confrontabili. L'analisi ufficiale la scegli tu.</div>
+  </div>
+
+  <!-- Lucea -->
+  <div class="search-card">
+    <span class="search-card__label">Sponsorizzato · Cluster E: AI Healthcare</span>
+    <div class="search-card__url">sideagroup.com/ai-che-lavora/pazienti</div>
+    <a class="search-card__title" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/lucea/" target="_blank">Patient intake con AI — Agente AI su WhatsApp — Preventivi automatici</a>
+    <div class="search-card__desc">I pazienti scrivono su WhatsApp. L'AI risponde, informa e fa i preventivi dal listino, con convenzioni e quota a carico del paziente. L'operatore interviene solo su escalation.</div>
+  </div>
+
+  <!-- Content -->
+  <div class="search-card">
+    <span class="search-card__label">Sponsorizzato · Cluster F: AI Content</span>
+    <div class="search-card__url">sideagroup.com/ai-che-lavora/contenuti</div>
+    <a class="search-card__title" href="https://giuseppefanizza-sidea.github.io/campagna-autunno-2026/content/" target="_blank">Generazione contenuti AI — Due agenti, un flusso — La firma resta umana</a>
+    <div class="search-card__desc">Un agente scrive secondo le linee guida, un secondo verifica fatti e stile. Ogni bozza arriva con livello di affidabilità e punti da controllare. La redazione non parte da zero.</div>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  Campagna "AI che lavora" · Sidea Group · Autunno 2026 · Budget totale: €10.000 · 8 settimane (1 set – 24 ott 2026) · LinkedIn + Meta + Google Search
+</footer>
+
+</body>
+</html>
