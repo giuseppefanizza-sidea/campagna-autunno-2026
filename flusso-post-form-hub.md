@@ -36,7 +36,6 @@ Contenuto:
 - Ringraziamento per la richiesta
 - Riepilogo breve delle 5 soluzioni con link diretto alla demo tematica
 - Messaggio: "Un consulente Sidea ti chiamerà a breve per individuare insieme le esigenze specifiche del tuo progetto"
-- CTA secondaria: se vuole anticipare, può rispondere a questa email
 
 ### Step 2 — Notifica interna al BDR (delay: 0 min)
 
