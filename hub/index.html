@@ -369,6 +369,20 @@
           <form>
             <p class="required-note">* Campi obbligatori</p>
             <div class="row">
+              <div class="col-12 mb-3">
+                <label class="form-label">Di cosa hai bisogno?</label>
+                <select class="form-select" name="soluzione">
+                  <option value="" selected disabled>Seleziona...</option>
+                  <option value="shopping-assistant">Shopping assistant per e-commerce</option>
+                  <option value="dynamic-pricing">Ottimizzazione prezzi (Dynamic Pricing)</option>
+                  <option value="forecasting">Previsione vendite (Forecasting)</option>
+                  <option value="patient-intake">Gestione pazienti (Patient Intake)</option>
+                  <option value="content-generator">Generazione contenuti</option>
+                  <option value="non-so">Non so ancora, voglio capire</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-md-6 mb-3">
                 <label class="form-label">Nome *</label>
                 <input type="text" class="form-control" name="nome" placeholder="Nome" required>
@@ -384,32 +398,24 @@
                 <input type="email" class="form-control" name="email" placeholder="email@azienda.it" required>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label">Azienda *</label>
-                <input type="text" class="form-control" name="azienda" placeholder="Azienda" required>
+                <label class="form-label">Telefono *</label>
+                <input type="tel" class="form-control" name="telefono" placeholder="Telefono" required>
               </div>
             </div>
             <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Azienda *</label>
+                <input type="text" class="form-control" name="azienda" placeholder="Azienda" required>
+              </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">Ruolo</label>
                 <input type="text" class="form-control" name="ruolo" placeholder="Ruolo (opzionale)">
               </div>
-              <div class="col-md-6 mb-3">
-                <label class="form-label">Di cosa hai bisogno?</label>
-                <select class="form-select" name="soluzione">
-                  <option value="" selected disabled>Seleziona...</option>
-                  <option value="shopping-assistant">Shopping assistant per e-commerce</option>
-                  <option value="dynamic-pricing">Ottimizzazione prezzi (Dynamic Pricing)</option>
-                  <option value="forecasting">Previsione vendite (Forecasting)</option>
-                  <option value="patient-intake">Gestione pazienti (Patient Intake)</option>
-                  <option value="content-generator">Generazione contenuti</option>
-                  <option value="non-so">Non so ancora, voglio capire</option>
-                </select>
-              </div>
             </div>
             <div class="row">
               <div class="col-12 mb-3">
-                <label class="form-label">Descrivi brevemente la tua esigenza *</label>
-                <textarea class="form-control" name="esigenza" placeholder="Qual è la sfida che vorresti affrontare?" required minlength="20" maxlength="500"></textarea>
+                <label class="form-label">Raccontaci la tua esigenza *</label>
+                <textarea class="form-control" name="esigenza" placeholder="Qual è la sfida che vorresti affrontare?" required minlength="15" maxlength="500"></textarea>
               </div>
             </div>
             <div class="checkbox-row">
@@ -421,7 +427,7 @@
               <label for="marketing">Esprimo il consenso al trattamento dei dati personali per finalità di "marketing diretto" attraverso strumenti tradizionali e automatizzati di contatto.</label>
             </div>
             <div class="text-center mt-4">
-              <button type="submit" class="btn-submit">Invia</button>
+              <a href="../email-hub-followup/" class="btn-submit" style="display:inline-block;text-decoration:none;text-align:center;">Invia la mia richiesta</a>
             </div>
           </form>
         </div>
